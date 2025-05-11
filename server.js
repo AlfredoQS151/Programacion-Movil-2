@@ -37,6 +37,7 @@ app.post("/send", async (req, res) => {
   }
 });
 
-app.listen(PORT, "0.0.0.0", () => {
-  console.log(`Servidor FCM corriendo en http://192.168.100.8:${PORT}`);
+app.listen(process.env.PORT || 3000, () => {
+  console.log("Servidor FCM en ejecución");
 });
+
