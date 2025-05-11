@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Enviar Push FCM</title>
+</head>
+<body>
+  <h1>Enviar notificación Push</h1>
+  <form id="fcmForm">
+    <label>Token del dispositivo:</label><br>
+    <textarea id="token" rows="5" cols="60" required></textarea><br><br>
+
+    <label>Título:</label><br>
+    <input type="text" id="title" required><br><br>
+
+    <label>Mensaje:</label><br>
+    <textarea id="body" rows="4" cols="60" required></textarea><br><br>
+
+    <button type="submit">Enviar Notificación</button>
+  </form>
+
+  <p id="response"></p>
+
+  <script>
+    document.getElementById("fcmForm").addEventListener("submit", async function(e) {
+      e.preventDefault();
+      const token = document.getElementById("token").value;
+      const title = document.getElementById("title").value;
+      const body = document.getElementById("body").value;
+
+      const response = await fetch("/send", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ token, title, body })
+      });
+
+      const text = await response.text();
+      document.getElementById("response").innerText = text;
+    });
+  </script>
+</body>
+</html>
