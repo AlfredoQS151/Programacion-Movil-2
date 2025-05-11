@@ -3,10 +3,10 @@ const bodyParser = require("body-parser");
 const admin = require("firebase-admin");
 const path = require("path");
 
-const serviceAccount = require("./serviceAccountKey.json");
+const credentials = JSON.parse(process.env.GOOGLE_APPLICATION_CREDENTIALS_JSON);
 
 admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount)
+  credential: admin.credential.cert(credentials)
 });
 
 const app = express();
